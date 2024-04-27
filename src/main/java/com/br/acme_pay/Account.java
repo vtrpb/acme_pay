@@ -14,12 +14,12 @@ public class Account {
     private Double balance;
 
     public void deposit(BigDecimal amount)  {
-        this.balance.add(amount);
+        this.balance = this.balance.add(amount);
     }
     public void withdraw(BigDecimal amount) {
-        // Compare usando compareTo em vez de >= porque BigDecimal não suporta operadores diretamente
-        if (this.balance.compareTo(amount) >= 0) {
-            // É necessário atribuir o resultado de subtract de volta à balance, pois BigDecimal é imutável
+
+        if (checkBalance(amount)) {
+
             this.balance = this.balance.subtract(amount);
         } else {
             // Complete a exceção que você deseja lançar
@@ -27,17 +27,25 @@ public class Account {
         }
     }
 
-    public void transfer(Account origin, Account destiny, BigDecimal amount) {
+    public void transfer(Account destiny, BigDecimal amount) {
 
-        if (origin.balance.compareTo(amount) >= 0) {
+        if (checkBalance(amount)) {
 
             destiny.balance.add(amount);
-            origin.balance = origin.balance.subtract(amount);
+            this.balance = this.balance.subtract(amount);
 
         } else {
             throw new IllegalArgumentException("Insufficient funds");
         }
     }
+
+    private boolean checkBalance(BigDecimal amount)  {
+
+        return this.balance.compareTo(amount) >= 0;
+
+    }
+
+
 
 
 }
