@@ -7,6 +7,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="acme-pay-customer-service" />
+        <module name="acme-pay-transaction-service" />
         <module name="acme-pay-account-service" />
       </profile>
     </annotationProcessing>
